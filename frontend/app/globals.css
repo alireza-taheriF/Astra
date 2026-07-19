@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Astra design tokens.
+ *
+ * The palette is a pure dark theme. Semantic tokens are expressed as HSL
+ * triples so Tailwind's `hsl(var(--token))` mapping and opacity modifiers work.
+ */
+@layer base {
+  :root {
+    --background: 240 33% 5%; /* #0A0A0F */
+    --foreground: 210 40% 98%;
+
+    --card: 240 24% 9%; /* #12121A */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 24% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 239 84% 67%; /* indigo #6366F1 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 20% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 20% 14%;
+    --muted-foreground: 240 8% 62%;
+
+    --accent: 271 91% 65%; /* purple #A855F7 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 24% 15%; /* #1F1F2E */
+    --input: 240 24% 15%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* Subtle radial glow anchoring the dark canvas. */
+    background-image:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        rgba(99, 102, 241, 0.12),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 100% 0%,
+        rgba(168, 85, 247, 0.08),
+        transparent
+      );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Respect users who prefer reduced motion: disable all animation. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Thin, dark, unobtrusive scrollbars for horizontal marquees. */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-gradient {
+    @apply bg-accent-gradient bg-clip-text text-transparent;
+  }
+}
